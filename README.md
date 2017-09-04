@@ -19,7 +19,7 @@ const Nightmre = require('nightmare')
 // const puppeteer = require('puppeteer')
 
 (async () => {
-    const page = Ditto(Nightmare)
+    const page = await Ditto(Nightmare)
     // const page = Ditto(puppeteer)
     await page.goto('http://www.example.com/')
     await page.wait('h1')

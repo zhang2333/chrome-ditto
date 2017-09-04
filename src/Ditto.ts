@@ -1,6 +1,6 @@
 import Nightmare from './browsers/Nightmare'
 import Puppeteer from './browsers/Puppeteer'
-import { DittoOptions } from "./models/types"
+import { DittoOptions } from './models/types'
 
 export default function (source, options: DittoOptions = {}): Promise<any> {
     let Model
@@ -17,6 +17,7 @@ export default function (source, options: DittoOptions = {}): Promise<any> {
         show: false,
         showImages: true,
         ignoreHTTPSErrors: false,
+        waitTimeout: 3e3,
 
         ...options
     }

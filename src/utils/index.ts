@@ -8,3 +8,12 @@ export function exists (arr: any[], ite: Function): boolean {
     }
     return flag
 }
+
+export function timeout (promise: Promise<any>, time: number = 0): Promise<any> {
+    return new Promise((res, rej) => {
+        promise.then(res)
+        setTimeout(() => {
+            rej(new Error(`timed out after ${time} msec`))
+        }, time)
+    })
+}

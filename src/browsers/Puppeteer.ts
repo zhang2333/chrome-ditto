@@ -1,16 +1,19 @@
 import Base from '../models/Base'
-import { DittoOptions } from "../models/types"
+import { DittoOptions } from '../models/types'
 import { exists } from '../utils'
 
 export default class Puppeteer extends Base {
     browser: any
     name: string = 'puppeteer'
+    options: DittoOptions
 
     constructor (model: any) {
         super(model)
     }
 
     async init(options: DittoOptions) {
+        this.options = options
+
         let browser = await this.model.launch({
             headless: !options.show,
             ignoreHTTPSErrors: options.ignoreHTTPSErrors
@@ -41,12 +44,18 @@ export default class Puppeteer extends Base {
     wait(...args): Promise<void> {
         const firstArg = args[0]
 
+        let timeout
+        
         if (args.length > 1) {
-            if (typeof firstArg === 'string') {
-                args[1] = { timeout: args[1] }
-            } else if (typeof firstArg === 'function') {
-                args.splice(1, 0, {})
-            }
+            timeout = this.options.waitTimeout
+        }
+
+        let ops = { timeout }
+
+        if (typeof firstArg === 'string') {
+            args[1] = ops
+        } else if (typeof firstArg === 'function') {
+            args.splice(1, 0, ops)
         }
 
         return this.ins.waitFor(...args)
@@ -69,7 +78,7 @@ export default class Puppeteer extends Base {
         await this.ins.screenshot({ path })
     }
 
-    async viewport(width: number, height: number) {
+    async setViewport(width: number, height: number) {
         await this.ins.setViewport({ width, height })
     }
 }
