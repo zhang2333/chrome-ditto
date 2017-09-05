@@ -1,3 +1,3 @@
-import Ditto from './src/Ditto'
+const Ditto = require('./src/Ditto').default
 
-export default Ditto
+module.exports = Ditto

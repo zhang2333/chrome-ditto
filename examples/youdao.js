@@ -1,7 +1,7 @@
 const Nightmare = require('nightmare')
 const Puppeteer = require('puppeteer')
 
-const Ditto = require('../dist').default
+const Ditto = require('../dist')
 
 const crawl = async (browser) => {
     let page
