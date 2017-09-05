@@ -1,4 +1,4 @@
-export function exists (arr: any[], ite: Function): boolean {
+export function exists(arr: any[], ite: Function): boolean {
     let flag: boolean = false
     for (let item of arr) {
         if (!!ite(item)) {
@@ -9,7 +9,7 @@ export function exists (arr: any[], ite: Function): boolean {
     return flag
 }
 
-export function timeout (promise: Promise<any>, time: number = 0): Promise<any> {
+export function timeout(promise: Promise<any>, time: number = 0): Promise<any> {
     return new Promise((res, rej) => {
         promise.then(res)
         setTimeout(() => {

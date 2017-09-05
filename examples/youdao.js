@@ -17,11 +17,15 @@ const crawl = async (browser) => {
         await page.wait(selInput, 5e3)
         await page.type(selInput, 'browser')
         await page.click('button')
-        await page.wait(selPara)
+
+        const waitings = ['.aaa', '#hohwpekm', '.gewagheaw', '.xyz', selPara]
+        let index = await page.waitOne(waitings)
+        console.assert(4 === index, 'result of waitOne() should be 4')
+
         let paraphrasing = await page.evaluate((sel) => {
-            let li = document.querySelector(sel)
-            return li.textContent.trim()
-        }, selPara)
+            let ele = document.querySelector(sel)
+            return ele.textContent.trim()
+        }, waitings[index])
 
         console.log(page.name, paraphrasing)
     } catch (err) {

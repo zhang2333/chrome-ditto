@@ -2,7 +2,7 @@ import Nightmare from './browsers/Nightmare'
 import Puppeteer from './browsers/Puppeteer'
 import { DittoOptions } from './models/types'
 
-export default function (source, options: DittoOptions = {}): Promise<any> {
+export default function (source, options: DittoOptions = {}): Promise<Nightmare|Puppeteer> {
     let Model
 
     if (source.launch) {
@@ -17,10 +17,10 @@ export default function (source, options: DittoOptions = {}): Promise<any> {
         show: false,
         showImages: true,
         ignoreHTTPSErrors: false,
-        waitTimeout: 3e3,
+        waitTimeout: 3e4,
 
         ...options
     }
 
-    return new Model(source).init(mergedOptions)
+    return new Model(source, mergedOptions).init()
 }

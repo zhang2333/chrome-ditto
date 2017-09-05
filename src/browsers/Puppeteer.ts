@@ -5,13 +5,13 @@ import { exists } from '../utils'
 export default class Puppeteer extends Base {
     browser: any
     name: string = 'puppeteer'
-    options: DittoOptions
 
-    constructor (model: any) {
-        super(model)
+    constructor(model: any, options: DittoOptions) {
+        super(model, options)
     }
 
-    async init(options: DittoOptions) {
+    async init(options: DittoOptions): Promise<Puppeteer> {
+        options = options || this.options
         this.options = options
 
         let browser = await this.model.launch({
@@ -25,7 +25,7 @@ export default class Puppeteer extends Base {
             await page.setRequestInterceptionEnabled(true)
 
             const exts = ['png', 'jpg', 'gif']
-    
+
             page.on('request', (req) => {
                 if (exists(exts, ext => req.url.endsWith('.' + ext))) {
                     req.abort()
@@ -45,7 +45,7 @@ export default class Puppeteer extends Base {
         const firstArg = args[0]
 
         let timeout
-        
+
         if (args.length > 1) {
             timeout = this.options.waitTimeout
         }
