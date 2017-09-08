@@ -10,6 +10,10 @@ export default abstract class Base {
         this.options = options
     }
 
+    isClosed(): boolean {
+        return !!this.ins
+    }
+
     async goto(url: string) {
         await this.ins.goto(url)
     }
@@ -34,14 +38,6 @@ export default abstract class Base {
         await this.ins.wait(...args)
     }
 
-    evaluate(...args): Promise<any> {
-        return this.ins.evaluate(...args)
-    }
-
-    html(): Promise<string> {
-        return this.ins.html()
-    }
-
     async waitOne(waitings: Array<any>, timeout: number) {
         timeout = timeout >= 0 ? timeout : this.options.waitTimeout
 
@@ -52,6 +48,14 @@ export default abstract class Base {
         let index = await Promise.race(promises)
 
         return index
+    }
+
+    evaluate(...args): Promise<any> {
+        return this.ins.evaluate(...args)
+    }
+
+    html(): Promise<string> {
+        return this.ins.html()
     }
 
     abstract close(): Promise<void>

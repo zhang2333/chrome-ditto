@@ -30,7 +30,9 @@ export default class Nightmare extends Base {
     }
 
     close(): Promise<void> {
-        return this.ins.end().then(() => { })
+        return this.ins.end().then(() => {
+            this.ins = null
+        })
     }
 
     async wait(...args) {
