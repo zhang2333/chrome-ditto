@@ -35,6 +35,12 @@ export default class Nightmare extends Base {
         })
     }
 
+    html(): Promise<string> {
+        return this.evaluate(() => {
+            return document.documentElement.outerHTML
+        })
+    }
+
     async wait(...args) {
         const firstArg = args[0]
 

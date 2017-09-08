@@ -54,11 +54,8 @@ export default abstract class Base {
         return this.ins.evaluate(...args)
     }
 
-    html(): Promise<string> {
-        return this.ins.html()
-    }
-
     abstract close(): Promise<void>
+    abstract html(): Promise<string>
     abstract init(options: DittoOptions): Promise<any>
     abstract screenshot(path: string): Promise<any>
 }
