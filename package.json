@@ -1,6 +1,6 @@
 {
   "name": "chrome-ditto",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "LouisZhang <spade9k@gmail.com>",
   "description": "Common API for Nightmare, Puppeteer",
   "license": "MIT",

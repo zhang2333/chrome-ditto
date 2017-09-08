@@ -65,11 +65,10 @@ export default class Puppeteer extends Base {
         return this.ins.content()
     }
 
-    close(): Promise<void> {
-        return this.browser.close().then(() => {
-            this.ins = null
-            this.browser = null
-        })
+    async close() {
+        this.browser.close()
+        this.ins = null
+        this.browser = null
     }
 
     async type(selector: string, text: string) {
