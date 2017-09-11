@@ -1,8 +1,8 @@
-import Base from '../models/Base'
+import Browser from '../models/Browser'
 import { DittoOptions } from '../models/types'
 import { exists } from '../utils'
 
-export default class Puppeteer extends Base {
+export default class Puppeteer extends Browser {
     browser: any
     name: string = 'puppeteer'
 

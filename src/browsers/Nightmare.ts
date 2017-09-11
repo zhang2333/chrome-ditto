@@ -1,10 +1,10 @@
 import * as path from 'path'
 
-import Base from '../models/Base'
+import Browser from '../models/Browser'
 import { DittoOptions } from '../models/types'
 import * as utils from '../utils'
 
-export default class Nightmare extends Base {
+export default class Nightmare extends Browser {
     name: string = 'nightmare'
 
     constructor(model: any, options: DittoOptions) {

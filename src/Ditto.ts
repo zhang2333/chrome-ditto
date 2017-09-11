@@ -1,8 +1,9 @@
+import Browser from './models/Browser'
 import Nightmare from './browsers/Nightmare'
 import Puppeteer from './browsers/Puppeteer'
 import { DittoOptions } from './models/types'
 
-export default function (source, options: DittoOptions = {}): Promise<Nightmare|Puppeteer> {
+export default function (source, options: DittoOptions = {}): Promise<Browser> {
     let Model
 
     if (source.launch) {

@@ -1,6 +1,7 @@
 import { DittoOptions } from "./types"
 
 export default abstract class Base {
+    name: string
     model: any
     ins: any
     options: DittoOptions
