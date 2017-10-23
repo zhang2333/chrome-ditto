@@ -1,33 +1,11 @@
 import * as path from 'path'
 
-import Browser from '../models/Browser'
+import Page from '../models/Page'
 import { DittoOptions } from '../models/types'
 import * as utils from '../utils'
 
-export default class Nightmare extends Browser {
-    name: string = 'nightmare'
-
-    constructor(model: any, options: DittoOptions) {
-        super(model, options)
-    }
-
-    async init(options: DittoOptions): Promise<Nightmare> {
-        options = options || this.options
-        this.options = options
-
-        this.ins = this.model({
-            switches: {
-                'ignore-certificate-errors': options.ignoreHTTPSErrors
-            },
-            webPreferences: {
-                showImages: options.showImages,
-            },
-            waitTimeout: options.waitTimeout,
-            show: options.show,
-        })
-
-        return this
-    }
+export default class NightmarePage extends Page {
+    ins: any
 
     html(): Promise<string> {
         return this.evaluate(() => {

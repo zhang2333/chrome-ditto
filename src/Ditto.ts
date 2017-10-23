@@ -1,15 +1,14 @@
-import Browser from './models/Browser'
-import Nightmare from './browsers/Nightmare'
-import Puppeteer from './browsers/Puppeteer'
-import { DittoOptions } from './models/types'
+import NightmareBrowser from './browsers/NightmareBrowser'
+import PuppeteerBrowser from './browsers/PuppeteerBrowser'
+import { DittoOptions, Browsers } from './models/types'
 
-export default function (source, options: DittoOptions = {}): Promise<Browser> {
+export default function (source, options: DittoOptions = {}): Promise<Browsers> {
     let Model
 
     if (source.launch) {
-        Model = Puppeteer
+        Model = PuppeteerBrowser
     } else if (source.Promise) {
-        Model = Nightmare
+        Model = NightmareBrowser
     } else {
         throw new Error('Wrong source')
     }
@@ -23,5 +22,5 @@ export default function (source, options: DittoOptions = {}): Promise<Browser> {
         ...options
     }
 
-    return new Model(source, mergedOptions).init()
+    return new Model(source).init(mergedOptions)
 }

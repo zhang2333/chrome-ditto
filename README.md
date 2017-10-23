@@ -19,8 +19,9 @@ const Nightmre = require('nightmare')
 // const puppeteer = require('puppeteer')
 
 (async () => {
-    const page = await Ditto(Nightmare)
-    // const page = Ditto(puppeteer)
+    const browser = await Ditto(Nightmare)
+    // const browser = Ditto(puppeteer)
+    const page = await browser.newPage()
     await page.goto('http://www.example.com/')
     await page.wait('h1')
     let content = await page.evaluate(() => {
@@ -28,7 +29,7 @@ const Nightmre = require('nightmare')
     })
     console.log('content:', content)
     await page.screenshot('./example.png')
-    await page.close()
+    await browser.close()
 })()
 ```
 
@@ -43,9 +44,15 @@ const Nightmre = require('nightmare')
 - `DittoOptions`
 
   - `show`: `boolean`
+
+    show browser or not
+
   - `showImages`: `boolean`
   - `ignoreHTTPSErrors`: `boolean`
   - `waitTimeout`: `number`
+  - `sessionId`: `string`
+
+    persist states between pages
 
 ### Browser
 
@@ -56,17 +63,21 @@ const Nightmre = require('nightmare')
 #### Properties
 
 - `model`
+- `name: string`
+
+  name of `Browser`, `'nightmare', 'puppeteer'` etc.
+
+### Page
+
+#### Properties
+
 - `ins`
 
   instance of model
 
 - `options: DittoOptions`
-- `name: string`
 
-  name of `Browser`, `'nightmare', 'puppeteer'` etc.
-
-
-#### Setters of Browser
+#### Setters of Page
 
 - `setUserAgent(ua: string): Promise`
 - `setViewport(width: number, height: number): Promise`

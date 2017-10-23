@@ -3,15 +3,19 @@ const Puppeteer = require('puppeteer')
 
 const Ditto = require('../dist')
 
-const crawl = async (browser) => {
-    let page
+const crawl = async (browserModel) => {
+    let browser
     const selInput = '#translateContent'
     const selPara = '#phrsListTab > .trans-container li'
     let timeStart = Date.now()
 
     try {
-        page = await Ditto(browser, { show: false })
-        console.log(page.name, 'started')
+        browser = await Ditto(browserModel, {
+            show: false,
+            showImage: false
+        })
+        let page = await browser.newPage()
+        console.log(browser.name, 'started')
 
         await page.goto('http://dict.youdao.com/')
         await page.wait(selInput, 5e3)
@@ -27,12 +31,13 @@ const crawl = async (browser) => {
             return ele.textContent.trim()
         }, waitings[index])
 
-        console.log(page.name, paraphrasing)
+        await page.close()
+        console.log(browser.name, paraphrasing)
     } catch (err) {
         console.error(err)
     } finally {
-        await page.close()
-        console.log(page.name, `${(Date.now() - timeStart) / 1000}s`)
+        await browser.close()
+        console.log(browser.name, `${(Date.now() - timeStart) / 1000}s`)
     }
 }
 
