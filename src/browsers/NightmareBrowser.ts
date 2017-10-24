@@ -24,7 +24,7 @@ export default class NightmareBrowser extends Browser<NightmarePage> {
             show: options.show,
         }
         if (options.sessionId) {
-            initNMOptions.webPreferences['partition'] = options.sessionId
+            initNMOptions.webPreferences['partition'] = 'persist: ' + options.sessionId
         }
         let instance = this.model(initNMOptions)
         let page = new NightmarePage(options, instance)

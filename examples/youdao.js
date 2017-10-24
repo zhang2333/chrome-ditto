@@ -31,7 +31,7 @@ const crawl = async (browserModel) => {
             return ele.textContent.trim()
         }, waitings[index])
 
-        await page.close()
+        // await page.close()
         console.log(browser.name, paraphrasing)
     } catch (err) {
         console.error(err)
