@@ -13,18 +13,17 @@ export default class NightmareBrowser extends Browser<NightmarePage> {
 
     async newPage(): Promise<NightmarePage> {
         let options = this.options
+        let sessionId = options.sessionId ? 'persist: ' + options.sessionId : null
         let initNMOptions = {
             switches: {
                 'ignore-certificate-errors': options.ignoreHTTPSErrors
             },
             webPreferences: {
                 showImages: options.showImages,
+                partition: sessionId
             },
             waitTimeout: options.waitTimeout,
             show: options.show,
-        }
-        if (options.sessionId) {
-            initNMOptions.webPreferences['partition'] = 'persist: ' + options.sessionId
         }
         let instance = this.model(initNMOptions)
         let page = new NightmarePage(options, instance)

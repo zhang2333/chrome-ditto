@@ -18,6 +18,7 @@ export default function (source, options: DittoOptions = {}): Promise<Browsers> 
         showImages: true,
         ignoreHTTPSErrors: false,
         waitTimeout: 3e4,
+        sessionId: null,
 
         ...options
     }
