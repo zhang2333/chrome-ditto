@@ -29,11 +29,6 @@ export default class PuppeteerPage extends Page {
         return this.ins.content()
     }
 
-    async type(selector: string, text: string) {
-        await this.ins.focus(selector)
-        await this.ins.type(text)
-    }
-
     async screenshot(path: string) {
         await this.ins.screenshot({ path })
     }
