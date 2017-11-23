@@ -25,7 +25,17 @@ export default class NightmareBrowser extends Browser<NightmarePage> {
             waitTimeout: options.waitTimeout,
             show: options.show,
         }
+
+        let proxy = options.proxy
+        if (proxy.host) {
+            initNMOptions.switches['proxy-server'] = `${proxy.host}:${proxy.port}`
+        }
+
         let instance = this.model(initNMOptions)
+        if (proxy.username) {
+            await instance.authentication(proxy.username, proxy.password)
+        }
+
         let page = new NightmarePage(options, instance)
         this.pages.push(page)
 

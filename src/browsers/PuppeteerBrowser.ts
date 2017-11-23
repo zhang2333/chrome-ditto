@@ -11,10 +11,20 @@ export default class PuppeteerBrowser extends Browser<PuppeteerPage> {
         options = options || this.options
         this.options = options
 
-        let browser = await this.model.launch({
+        let launchOptions = {
             headless: !options.show,
-            ignoreHTTPSErrors: options.ignoreHTTPSErrors
-        })
+            ignoreHTTPSErrors: options.ignoreHTTPSErrors,
+            args: []
+        }
+
+        let proxy = options.proxy
+        if (proxy.host) {
+            let protocal = proxy.protocal || 'http'
+            let proxyUrl = `--proxy-server=${protocal}://${proxy.host}:${proxy.port}`
+            launchOptions.args.push(proxyUrl)
+        }
+
+        let browser = await this.model.launch(launchOptions)
 
         this.browser = browser
 
@@ -36,6 +46,14 @@ export default class PuppeteerBrowser extends Browser<PuppeteerPage> {
                 } else {
                     req.continue()
                 }
+            })
+        }
+
+        let proxy = options.proxy
+        if (proxy.username) {
+            await page.authenticate({
+                username: proxy.username,
+                password: proxy.password
             })
         }
 

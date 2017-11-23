@@ -19,6 +19,10 @@ export default function (source, options: DittoOptions = {}): Promise<Browsers> 
         ignoreHTTPSErrors: false,
         waitTimeout: 3e4,
         sessionId: null,
+        proxy: {
+            host: '',
+            port: 0
+        },
 
         ...options
     }
