@@ -4,7 +4,6 @@ import PuppeteerBrowser from "../browsers/PuppeteerBrowser"
 export interface Proxy {
     username?: string
     password?: string
-    protocal?: string
     host: string
     port: number
 }

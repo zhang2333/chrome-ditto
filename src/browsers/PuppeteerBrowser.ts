@@ -19,10 +19,9 @@ export default class PuppeteerBrowser extends Browser<PuppeteerPage> {
 
         let proxy = options.proxy
         if (proxy.host) {
-            let protocal = proxy.protocal || 'http'
-            let proxyUrl = `--proxy-server="${protocal}://${proxy.host}:${proxy.port}"`
+            let proxyUrl = `--proxy-server="http=${proxy.host}:${proxy.port}"`
             launchOptions.args.push(proxyUrl)
-            launchOptions.args.push('--proxy-bypass-list="127.0.0.1;"')
+            launchOptions.args.push('--proxy-bypass-list="127.0.0.1"')
         }
 
         let browser = await this.model.launch(launchOptions)
