@@ -40,7 +40,7 @@ export default class PuppeteerBrowser extends Browser<PuppeteerPage> {
         let page = await this.browser.newPage()
         
         if (!options.showImages) {
-            await page.setRequestInterceptionEnabled(true)
+            await page.setRequestInterception(true)
 
             const exts = ['png', 'jpg', 'gif']
 
