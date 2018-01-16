@@ -45,7 +45,7 @@ export default class PuppeteerBrowser extends Browser<PuppeteerPage> {
             const exts = ['png', 'jpg', 'gif']
 
             page.on('request', (req) => {
-                if (exists(exts, ext => req.url.endsWith('.' + ext))) {
+                if (exists(exts, ext => req.url().endsWith('.' + ext))) {
                     req.abort()
                 } else {
                     req.continue()
