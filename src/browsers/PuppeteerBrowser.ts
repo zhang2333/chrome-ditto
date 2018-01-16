@@ -24,6 +24,10 @@ export default class PuppeteerBrowser extends Browser<PuppeteerPage> {
             launchOptions.args.push('--proxy-bypass-list="127.0.0.1"')
         }
 
+        if (options.launchArgs.length) {
+            launchOptions.args = launchOptions.args.concat(options.launchArgs)
+        }
+
         let browser = await this.model.launch(launchOptions)
 
         this.browser = browser

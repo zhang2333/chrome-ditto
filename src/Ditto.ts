@@ -23,6 +23,7 @@ export default function (source, options: DittoOptions = {}): Promise<Browsers> 
             host: '',
             port: 0
         },
+        launchArgs: [],
 
         ...options
     }

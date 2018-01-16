@@ -15,6 +15,7 @@ export interface DittoOptions {
     waitTimeout?: number
     sessionId?: string
     proxy?: Proxy
+    launchArgs?: Array<string>
 }
 
 export type Browsers = NightmareBrowser | PuppeteerBrowser
