@@ -9,8 +9,9 @@ export default class PuppeteerPage extends Page {
         const firstArg = args[0]
 
         let timeout
-
-        if (args.length > 1) {
+        if (args.length > 1 && args[1] > 0) {
+            timeout = args[1]
+        } else {
             timeout = this.options.waitTimeout
         }
 
